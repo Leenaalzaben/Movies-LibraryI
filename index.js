@@ -79,7 +79,7 @@ function deleteHandler(req,res){
 }
 function getSpecificMovieHandeler(req,res){
 
-    let sql = `SELECT id FROM moviedb_table;`;
+    let sql = `SELECT id ,moviename FROM moviedb_table;`;
     client.query(sql).then((result)=>{
         console.log(result);
         res.json(result.rows)
