@@ -79,10 +79,16 @@ function deleteHandler(req,res){
 }
 function getSpecificMovieHandeler(req,res){
 
-    let sql = `SELECT id ,moviename FROM moviedb_table;`;
-    client.query(sql).then((result)=>{
-        console.log(result);
-        res.json(result.rows)
+    let id= req.params.id;
+let values=[id];
+    let sql = `SELECT * FROM moviedb_table WHERE id = $1`;
+    client.query(sql,values).then((result)=>{
+        if (result.rows.length===0){
+            res.send('This movie dose not exist');
+          }
+          else{
+            res.json(result.rows);
+          }
     }).catch()
     
 
